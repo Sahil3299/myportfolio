@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Custom Theme Overrides */
+@theme {
+  --color-primary: #2563EB;
+  --color-background: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-text: #1E293B;
+  --color-muted: #64748B;
+  --color-dark-bg: #0F172A;
+  --color-dark-card: #1E293B;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563EB;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* Custom Utility for Underlined Active Section / Links */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #2563EB;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
+}
+
+.nav-link-underline.active-link {
+  color: #2563EB;
+}
+
+.nav-link-underline.active-link::after {
+  width: 100%;
+}
+
+.dark .nav-link-underline.active-link {
+  color: #60A5FA;
+}
+
+.dark .nav-link-underline.active-link::after {
+  background-color: #60A5FA;
+}
