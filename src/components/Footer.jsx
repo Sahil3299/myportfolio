@@ -37,7 +37,7 @@ const Footer = () => {
         {/* Social Icons */}
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/sahilshinde-dev"
+            href="https://github.com/Sahil3299"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
@@ -46,7 +46,7 @@ const Footer = () => {
             <FaGithub className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com/in/sahil-shinde"
+            href="https://www.linkedin.com/in/sahil-shinde-a30948329"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
