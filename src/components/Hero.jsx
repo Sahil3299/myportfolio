@@ -155,8 +155,8 @@ const Hero = () => {
                 Find me on
               </span>
               {[
-                { icon: FaGithub, href: 'https://github.com/sahilshinde-dev', label: 'GitHub' },
-                { icon: FaLinkedin, href: 'https://linkedin.com/in/sahil-shinde', label: 'LinkedIn' },
+                { icon: FaGithub, href: 'https://github.com/Sahil3299', label: 'GitHub' },
+                { icon: FaLinkedin, href: 'www.linkedin.com/in/sahil-shinde-a30948329', label: 'LinkedIn' },
                 { icon: FaEnvelope, href: 'mailto:sahilshinde2402@gmail.com', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
