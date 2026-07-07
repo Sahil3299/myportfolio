@@ -4,20 +4,23 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: '#2563EB',      // blue-600
-        background: '#F8FAFC',   // light gray-white
-        card: '#FFFFFF',
-        text: '#1E293B',         // slate-800
-        muted: '#64748B',        // slate-500
-        'dark-bg': '#0F172A',    // slate-900
-        'dark-card': '#1E293B',
+        primary: '#000000',
+        accent: '#000000',
+        background: '#f2f2f0',
+        card: '#ffffff',
+        'card-hover': '#f7f7f5',
+        text: '#1a1a1a',
+        muted: '#6b6b6b',
+        border: '#e5e5e3',
+        'dark-bg': '#f2f2f0',
+        'dark-card': '#ffffff',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        mono: ['Inter', 'sans-serif'],
       },
     },
   },

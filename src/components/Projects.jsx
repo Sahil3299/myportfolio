@@ -9,33 +9,39 @@ const Projects = () => {
   const projects = [
     {
       title: 'NestMate',
-      subtitle: 'Flatmate & Rental Platform',
-      description: 'A platform to find rooms and roommates. Features 300+ active listings, real-time WebSocket chat under 150ms latency, and JWT authorization for data security.',
+      tag: 'PROJECT 01',
+      context: 'Flatmate and rental platforms lack real-time communication and secure data handling.',
+      execution: 'Built a full-stack platform with React frontend, Node.js/Express backend, MongoDB, and WebSocket-based real-time chat. Implemented JWT authorization and optimized queries.',
+      impact: '300+ active listings, real-time chat under 150ms latency, and secure JWT-based data protection.',
       stack: ['React', 'Node.js', 'MongoDB', 'Socket.IO', 'Tailwind'],
       github: 'https://github.com/Sahil3299/NestMate',
       live: null,
       image: nestmateImg,
-      gradient: 'from-blue-600 to-indigo-600',
+      metrics: ['300+ Active Listings', '<150ms Chat Latency', 'JWT Secured'],
     },
     {
       title: 'BloodConnect',
-      subtitle: 'Emergency Blood Donor Network',
-      description: 'An emergency platform using geospatial indexing to locate and notify the nearest blood donor in under 3 seconds. Proudly adopted by 3 local hospitals.',
+      tag: 'PROJECT 02',
+      context: 'Emergency blood donors are hard to locate quickly during critical situations.',
+      execution: 'Engineered a geospatial query system with MongoDB 2dsphere indexes to find and notify nearest blood donors. Built with React, Node.js, and Geolocation API.',
+      impact: 'Locates and notifies nearest donors in under 3 seconds. Adopted by 3 local hospitals.',
       stack: ['React', 'Node.js', 'MongoDB', 'Geolocation API'],
       github: 'https://github.com/Sahil3299/Blood_connect',
       live: 'https://blood-connect-jwdg.vercel.app/',
       image: bloodconnectImg,
-      gradient: 'from-rose-600 to-red-600',
+      metrics: ['<3s Donor Location', '3 Hospitals', 'Real-time Alerts'],
     },
     {
       title: 'YelpCamp',
-      subtitle: 'Campground Review Platform',
-      description: 'A full-stack CRUD application allowing users to share and review campgrounds. Features Passport.js authentication, Cloudinary image storage, and Mapbox maps.',
+      tag: 'PROJECT 03',
+      context: 'Campground enthusiasts need a platform to share and review camping spots.',
+      execution: 'Developed a full CRUD application with Passport.js authentication, Cloudinary image storage, and Mapbox integration for interactive campground maps.',
+      impact: 'Full-featured campground review platform with secure auth and rich media support.',
       stack: ['Node.js', 'Express', 'MongoDB', 'Cloudinary', 'Mapbox'],
       github: 'https://github.com/Sahil3299/YelpCamp',
       live: 'https://yelpcamp-9qpe.onrender.com/',
       image: yelpcampImg,
-      gradient: 'from-amber-600 to-orange-600',
+      metrics: ['Full CRUD', 'Auth System', 'Map Integration'],
     },
   ];
 
@@ -43,9 +49,7 @@ const Projects = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
@@ -54,108 +58,136 @@ const Projects = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
   };
 
   return (
-    <section 
-      id="projects" 
-      className="py-20 px-4 bg-white dark:bg-dark-card transition-colors duration-300 scroll-mt-16"
+    <section
+      id="work"
+      className="py-24 px-4 relative"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Section Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 dark:text-gray-100">
-            Featured Projects
-          </h2>
-          <div className="w-20 h-1.5 bg-primary dark:bg-blue-500 mx-auto mt-3 rounded-full"></div>
-        </div>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-4 mb-4"
+        >
+          <span className="section-number font-mono">02 / FEATURED WORK</span>
+          <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
+        </motion.div>
 
-        {/* Projects Grid */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-3xl sm:text-4xl font-bold mb-16"
+        >
+          Proof of Work.
+        </motion.h2>
+
+        {/* Projects */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="space-y-20"
         >
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <motion.div
               key={project.title}
               variants={cardVariants}
-              whileHover={{ scale: 1.03 }}
-              className="flex flex-col bg-slate-50 dark:bg-dark-bg rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
             >
-              {/* Card Image Banner */}
-              <div className="relative h-48 overflow-hidden group">
-                <img
-                  src={project.image}
-                  alt={`${project.title} — ${project.subtitle}`}
-                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
-                />
-                {/* Gradient overlay for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                {/* Title on image */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <span className="text-[10px] font-semibold text-white/80 uppercase tracking-widest">
-                    Web Application
-                  </span>
-                  <h3 className="text-xl font-bold text-white drop-shadow-md leading-tight">
-                    {project.title}
-                  </h3>
-                </div>
-              </div>
+              {/* Left - Project Info */}
+              <div className="lg:col-span-5 space-y-6">
+                <span className="font-mono text-xs text-primary/60 tracking-wider">{project.tag}</span>
 
-              {/* Card Content */}
-              <div className="flex-1 p-6 flex flex-col justify-between">
-                <div className="space-y-4">
-                  {/* Subtitle */}
-                  <h4 className="text-sm font-semibold text-primary dark:text-blue-400 uppercase tracking-wide">
-                    {project.subtitle}
-                  </h4>
-                  {/* Description */}
-                  <p className="text-sm text-muted dark:text-slate-400 leading-relaxed">
-                    {project.description}
-                  </p>
+                <h3 className="text-2xl sm:text-3xl font-bold">{project.title}</h3>
+
+                {/* Context */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-mono text-accent uppercase tracking-wider">Context</h4>
+                  <p className="text-sm text-muted leading-relaxed">{project.context}</p>
                 </div>
 
-                <div className="mt-6 space-y-5">
-                  {/* Tech Badges */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 text-[11px] font-semibold rounded-md bg-white dark:bg-dark-card border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                {/* Execution */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-mono text-accent uppercase tracking-wider">Execution</h4>
+                  <p className="text-sm text-muted leading-relaxed">{project.execution}</p>
+                </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-3 pt-2 border-t border-slate-200/50 dark:border-slate-800/50">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full border border-slate-300 hover:border-slate-800 dark:border-slate-700 dark:hover:border-slate-200 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all duration-200"
+                {/* Impact */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-mono text-accent uppercase tracking-wider">Impact</h4>
+                  <p className="text-sm text-muted leading-relaxed">{project.impact}</p>
+                </div>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-[11px] font-mono rounded-md bg-primary/5 border border-primary/20 text-primary/80"
                     >
-                      <FaGithub className="w-3.5 h-3.5" />
-                      Code
-                    </a>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Metrics */}
+                <div className="flex flex-wrap gap-3">
+                  {project.metrics.map((metric) => (
+                    <span
+                      key={metric}
+                      className="px-3 py-1.5 text-xs font-mono rounded-lg bg-accent/5 border border-accent/20 text-accent"
+                    >
+                      {metric}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-4 pt-2">
+                  {project.live && (
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full text-white bg-primary hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 transition-all duration-200"
+                      className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary hover:bg-blue-700 text-white transition-all duration-300"
                     >
                       <FaExternalLinkAlt className="w-3 h-3" />
-                      Live Demo
+                      Explore Live
                     </a>
+                  )}
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg border border-border hover:border-primary/50 text-muted hover:text-text transition-all duration-300"
+                  >
+                    <FaGithub className="w-4 h-4" />
+                    Repository
+                  </a>
+                </div>
+              </div>
+
+              {/* Right - Project Image */}
+              <div className="lg:col-span-7">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+                  <div className="relative rounded-2xl overflow-hidden border border-border/50">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                   </div>
                 </div>
               </div>

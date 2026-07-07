@@ -1,200 +1,205 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { FaFileAlt, FaGithub, FaLinkedin, FaEnvelope, FaArrowRight } from 'react-icons/fa';
-import { MdWork } from 'react-icons/md';
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaCheck } from 'react-icons/fa';
 import profileImg from '../assets/me.jpg';
 
+const leetcodeStats = { total: 424, easy: 226, med: 166, hard: 32 };
+
 const Hero = () => {
+  const [copied, setCopied] = useState(null);
+
   const handleScrollTo = (id) => (e) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
-      const offset = 80;
-      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 100;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopied(text);
+    setTimeout(() => setCopied(null), 1500);
+  };
+
+  const rightVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease: 'easeOut', delay: 0.2 } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({ opacity: 1, y: 0, transition: { delay: 0.5 + i * 0.15, duration: 0.4 } }),
+  };
+
   return (
-    <section
-      id="about"
-      className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-20 px-4 overflow-hidden bg-slate-50 dark:bg-dark-bg transition-colors duration-300"
-    >
-      {/* ───── Background Blobs ───── */}
-      <div className="absolute top-20 -left-32 w-[28rem] h-[28rem] bg-blue-500/8 dark:bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -right-32 w-[32rem] h-[32rem] bg-indigo-500/8 dark:bg-indigo-600/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-sky-400/5 dark:bg-sky-600/3 rounded-full blur-3xl pointer-events-none" />
+    <section id="hero" className="relative min-h-screen py-24 px-4 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-      <div className="max-w-6xl mx-auto z-10 w-full">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-14 lg:gap-20">
-
-          {/* ═══════════ Left — Text Content ═══════════ */}
+          {/* ──────── LEFT COLUMN ──────── */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="flex-1 text-center lg:text-left space-y-7"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="flex-1 space-y-7"
           >
-            {/* Status Badge */}
-            <motion.span
-              initial={{ opacity: 0, y: -10 }}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black text-white text-[10px] font-semibold uppercase tracking-wider"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              ACTIVE SPRINT // AVAILABLE
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/40 text-primary dark:text-blue-400 border border-blue-100 dark:border-blue-900/40"
+              className="space-y-2"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-              </span>
-              {/* Available for opportunities */}
-            </motion.span>
-
-            {/* Heading */}
-            <div className="space-y-3">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-lg sm:text-xl font-medium text-slate-500 dark:text-slate-400"
-              >
-                {/* Hey there 👋, I'm */}
-              </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 dark:text-gray-50"
-              >
-                Sahil{' '}
-                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 dark:from-blue-400 dark:via-blue-500 dark:to-indigo-400 bg-clip-text text-transparent">
-                  Shinde
-                </span>
-              </motion.h1>
-            </div>
-
-            {/* Typewriter */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-              className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-600 dark:text-slate-300 min-h-[2.5rem] sm:min-h-[3rem]"
-            >
-              <span className="text-slate-400 dark:text-slate-500 mr-1">&lt;</span>
-              <TypeAnimation
-                sequence={[
-                  'Frontend Developer',
-                  2000,
-                  'Full Stack Developer',
-                  2000,
-                  'MERN Stack Developer',
-                  2000,
-                  'AI & ML Student',
-                  2000,
-                  'Open Source Enthusiast',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={45}
-                deletionSpeed={55}
-                repeat={Infinity}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent"
-                cursor={true}
-                style={{ display: 'inline-block' }}
-              />
-              <span className="text-slate-400 dark:text-slate-500 ml-0.5">/&gt;</span>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9]">
+                FROM PROTOTYPE<br />
+                <span className="italic font-black">TO PRODUCTION.</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-muted max-w-md">
+                Full Stack Developer &amp; AI/ML student — I take rough ideas and turn them into software people actually use.
+              </p>
             </motion.div>
 
-            {/* Bio */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
-              className="max-w-xl text-base sm:text-lg text-muted dark:text-slate-400 leading-relaxed"
-            >
-              Full-stack developer and AI &amp; ML engineering student with hands-on
-              experience shipping production-grade web apps. Skilled in the MERN
-              stack, real-time systems with Socket.IO, and geolocation-driven
-              platforms.
-            </motion.p>
-
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
-              className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 pt-2"
+              transition={{ delay: 0.5, duration: 0.4 }}
             >
               <a
-                href="#projects"
-                onClick={handleScrollTo('projects')}
-                className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/25 dark:shadow-blue-900/30 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+                href="#work"
+                onClick={handleScrollTo('work')}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold hover:bg-black/80 transition-all"
               >
-                <MdWork className="w-5 h-5" />
-                View Projects
-                <FaArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
+                See the work
+                <FaArrowDown className="w-3 h-3" />
               </a>
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold border-2 border-slate-200 hover:border-blue-500 text-slate-700 hover:text-blue-600 dark:border-slate-700 dark:hover:border-blue-500 dark:text-slate-300 dark:hover:text-blue-400 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-              >
-                <FaFileAlt className="w-4 h-4" />
-                Download Resume
-              </a>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              className="flex items-center justify-center lg:justify-start gap-3 pt-4"
-            >
-              <span className="text-xs font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider mr-2">
-                Find me on
-              </span>
-              {[
-                { icon: FaGithub, href: 'https://github.com/Sahil3299', label: 'GitHub' },
-                { icon: FaLinkedin, href: 'https://www.linkedin.com/in/sahil-shinde-a30948329', label: 'LinkedIn' },
-                { icon: FaEnvelope, href: 'mailto:sahilshinde2402@gmail.com', label: 'Email' },
-              ].map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={label !== 'Email' ? '_blank' : undefined}
-                  rel={label !== 'Email' ? 'noopener noreferrer' : undefined}
-                  className="p-2.5 rounded-xl bg-white dark:bg-dark-card border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-blue-800 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
-                  aria-label={label}
-                >
-                  <Icon className="w-[18px] h-[18px]" />
-                </a>
-              ))}
             </motion.div>
           </motion.div>
 
-          {/* ═══════════ Right — Profile Image ═══════════ */}
+          {/* ──────── RIGHT COLUMN — Photo + Cards Below ──────── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-            className="flex-shrink-0"
+            variants={rightVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full max-w-sm lg:max-w-md"
           >
-            <div className="relative group">
-              {/* Animated glow ring */}
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 rounded-full opacity-40 group-hover:opacity-60 blur-lg transition-all duration-700 animate-[spin_8s_linear_infinite]" />
+            {/* Photo */}
+            <div className="rounded-2xl overflow-hidden shadow-xl bg-white">
+              <img
+                src={profileImg}
+                alt="Sahil Shinde"
+                className="w-full aspect-[4/5] object-cover object-center"
+              />
+            </div>
 
-              {/* Image container */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl">
-                <img
-                  src={profileImg}
-                  alt="Sahil Shinde — Full Stack Developer"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+            {/* 3 Cards below photo */}
+            <div className="mt-5 grid grid-cols-3 gap-3">
+              {/* Card 1 — GitHub */}
+              <motion.div
+                custom={0}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                className="bg-white rounded-2xl shadow-md border border-border p-4"
+              >
+                <div className="flex items-center gap-1.5 mb-2">
+                  <FaGithub className="w-3 h-3" />
+                  <span className="text-[8px] font-semibold uppercase tracking-wider">GitHub</span>
+                </div>
+                <p className="text-lg font-black">680+</p>
+                <p className="text-[8px] text-muted mb-1.5">Commits</p>
+                <div className="flex items-end gap-[2px] h-5">
+                  {[40, 65, 35, 80, 55, 90, 70].map((h, i) => (
+                    <div key={i} className="flex-1 bg-black/10 rounded-t" style={{ height: `${h}%` }} />
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Card 2 — LeetCode */}
+              <motion.div
+                custom={1}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                className="bg-white rounded-2xl shadow-md border border-border p-4"
+              >
+                <span className="text-[8px] font-semibold uppercase tracking-wider mb-2 block">SOLVED</span>
+                <div className="flex items-center gap-2">
+                  <div className="relative w-10 h-10 shrink-0">
+                    <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="15" fill="none" stroke="#e5e5e3" strokeWidth="3" />
+                      <circle cx="18" cy="18" r="15" fill="none" stroke="#000" strokeWidth="3"
+                        strokeDasharray={`${(leetcodeStats.easy / 951) * 94.2} 94.2`} strokeLinecap="round" />
+                      <circle cx="18" cy="18" r="15" fill="none" stroke="#f59e0b" strokeWidth="3"
+                        strokeDasharray={`${(leetcodeStats.med / 2074) * 94.2} 94.2`}
+                        strokeDashoffset={`-${(leetcodeStats.easy / 951) * 94.2}`} strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute inset-0 flex items-center justify-center text-[9px] font-black">{leetcodeStats.total}</span>
+                  </div>
+                  <div className="space-y-0.5">
+                    {[
+                      { label: 'E', count: leetcodeStats.easy, color: 'bg-black' },
+                      { label: 'M', count: leetcodeStats.med, color: 'bg-amber-500' },
+                      { label: 'H', count: leetcodeStats.hard, color: 'bg-red-500' },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center gap-1">
+                        <span className={`w-1.5 h-1.5 rounded-full ${item.color}`} />
+                        <span className="text-[7px] text-muted">{item.label}</span>
+                        <span className="text-[7px] font-semibold">{item.count}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 3 — INDEX 06 */}
+              <motion.div
+                custom={2}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                className="bg-white rounded-2xl shadow-md border border-border p-4"
+              >
+                <span className="text-[8px] font-semibold uppercase tracking-widest mb-2 block">INDEX 06</span>
+                <div className="space-y-1.5">
+                  {[
+                    { icon: FaEnvelope, label: 'Email' },
+                    { icon: FaGithub, label: 'GitHub' },
+                    { icon: FaLinkedin, label: 'LinkedIn' },
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      onClick={() => copyToClipboard(item.label === 'Email' ? 'sahilshinde2402@gmail.com' : item.label === 'GitHub' ? '/Sahil3299' : '/in/sahil-shinde')}
+                      className="flex items-center gap-1.5 w-full hover:bg-black/5 rounded-lg p-1 transition-all group"
+                    >
+                      {copied && copied.includes(item.label) ? (
+                        <FaCheck className="w-2.5 h-2.5 text-green-600" />
+                      ) : (
+                        <item.icon className="w-2.5 h-2.5 text-muted group-hover:text-black transition-colors" />
+                      )}
+                      <span className="text-[7px] text-muted group-hover:text-black transition-colors">{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </motion.div>
+        </div>
 
+        {/* SCROLL indicator */}
+        <div className="hidden lg:flex flex-col items-center gap-2 absolute right-8 bottom-8">
+          <span className="text-[8px] tracking-[0.25em] text-muted" style={{ writingMode: 'vertical-rl' }}>SCROLL</span>
+          <div className="w-px h-12 bg-border" />
         </div>
       </div>
     </section>

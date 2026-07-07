@@ -1,67 +1,27 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FiArrowUp } from 'react-icons/fi';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="py-8 bg-white dark:bg-dark-card border-t border-slate-200/50 dark:border-slate-800/50 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        {/* Logo / Text */}
-        <div className="space-y-1">
-          <a 
-            href="#about"
-            onClick={handleLogoClick}
-            className="text-lg font-medium tracking-wide text-text dark:text-gray-100 hover:text-primary dark:hover:text-blue-400 transition-colors"
-          >
-            sahil<span className="font-bold text-primary dark:text-blue-500">shinde</span>
-          </a>
-          <p className="text-xs text-muted dark:text-slate-450">
-            Designed &amp; built by Sahil Shinde
-          </p>
-        </div>
+    <footer className="py-8 px-4 border-t border-border">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
+        <p>&copy; {year} Sahil Shinde. All rights reserved.</p>
 
-        {/* Copyright */}
-        <div className="text-sm text-slate-500 dark:text-slate-400">
-          &copy; {currentYear} All rights reserved.
-        </div>
+        <p>Designed &amp; built by Sahil Shinde</p>
 
-        {/* Social Icons */}
-        <div className="flex items-center gap-4">
-          <a
-            href="https://github.com/Sahil3299"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-            aria-label="GitHub Profile"
-          >
-            <FaGithub className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sahil-shinde-a30948329"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-lg text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-            aria-label="LinkedIn Profile"
-          >
-            <FaLinkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="mailto:sahilshinde2402@gmail.com"
-            className="p-2 rounded-lg text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-            aria-label="Send Email"
-          >
-            <FaEnvelope className="w-5 h-5" />
-          </a>
-        </div>
+        <a
+          href="#hero"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center gap-1 hover:text-black transition-colors"
+        >
+          Back to top
+          <FiArrowUp className="w-3 h-3" />
+        </a>
       </div>
     </footer>
   );
