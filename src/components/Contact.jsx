@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import resume from '../assets/sahil_resume (6).pdf';
 
 const Contact = () => {
   const channels = [
@@ -10,7 +11,7 @@ const Contact = () => {
     { number: '03', name: 'LinkedIn', href: 'https://www.linkedin.com/in/sahil-shinde-a30948329', detail: 'linkedin.com/in/sahil-shinde', icon: FaLinkedin },
     { number: '04', name: 'LeetCode', href: 'https://leetcode.com/u/GawULSVCu5/', detail: 'leetcode.com/u/GawULSVCu5', icon: SiLeetcode },
     { number: '05', name: 'Blog', href: '/blog', detail: 'Read technical posts', icon: FaExternalLinkAlt },
-    { number: '06', name: 'Resume', href: '#', detail: 'Download PDF', icon: FaExternalLinkAlt },
+    { number: '06', name: 'Resume', href: resume, detail: 'Download PDF', icon: FaExternalLinkAlt },
   ];
 
   return (
@@ -31,12 +32,12 @@ const Contact = () => {
             <motion.a
               key={channel.number}
               href={channel.href}
-              target={channel.name !== 'Email' && channel.name !== 'Blog' && channel.name !== 'Resume' ? '_blank' : undefined}
-              rel={channel.name !== 'Email' && channel.name !== 'Blog' && channel.name !== 'Resume' ? 'noopener noreferrer' : undefined}
+              target={channel.name === 'Email' ? undefined : '_blank'}
+              rel={channel.name === 'Email' ? undefined : 'noopener noreferrer'}
+              whileHover={{ scale: 1.02, transition: { type: 'spring', stiffness: 300, damping: 15 } }}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
-              transition={{ duration: 0.3, delay: parseInt(channel.number) * 0.05 }}
               className="group flex items-center justify-between p-5 rounded-2xl bg-white border border-border shadow-sm hover:shadow-md transition-all"
             >
               <div className="flex items-center gap-5">

@@ -32,7 +32,7 @@ const Navbar = ({ activeSection }) => {
             className="text-base sm:text-lg font-bold tracking-tight"
           >
             <span className="text-white">Sahil</span>
-            <span className="text-white/50">Shinde</span>
+            <span className="text-white/50"> Shinde</span>
           </a>
 
           <div className="hidden md:flex items-center gap-1">

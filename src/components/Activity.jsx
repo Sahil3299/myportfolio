@@ -66,7 +66,7 @@ const Activity = () => {
               <div className="flex items-center gap-2.5">
                 <span className="font-bold text-sm">LeetCode</span>
                 <div>
-                  <h3 className="font-bold text-sm">/ GawULSVCu5</h3>
+                  <h3 className="font-bold text-sm">/ Sahil-Shinde</h3>
                   <p className="text-xs text-muted">Algorithmic Baseline</p>
                 </div>
               </div>
@@ -86,15 +86,15 @@ const Activity = () => {
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
                   <circle cx="50" cy="50" r="42" fill="none" stroke="#e5e5e3" strokeWidth="8" />
                   <circle cx="50" cy="50" r="42" fill="none" stroke="#000" strokeWidth="8"
-                    strokeDasharray={`${(226/951) * 264} 264`} strokeLinecap="round" />
+                    strokeDasharray={`${(50/951) * 264} 264`} strokeLinecap="round" />
                   <circle cx="50" cy="50" r="42" fill="none" stroke="#f59e0b" strokeWidth="8"
-                    strokeDasharray={`${(166/2074) * 264} 264`}
-                    strokeDashoffset={`-${(226/951) * 264}`} strokeLinecap="round" />
+                    strokeDasharray={`${(25/2074) * 264} 264`}
+                    strokeDashoffset={`-${(50/951) * 264}`} strokeLinecap="round" />
                   <circle cx="50" cy="50" r="42" fill="none" stroke="#ef4444" strokeWidth="8"
-                    strokeDasharray={`${(32/948) * 264} 264`}
-                    strokeDashoffset={`-${((226/951) + (166/2074)) * 264}`} strokeLinecap="round" />
+                    strokeDasharray={`${(5/948) * 264} 264`}
+                    strokeDashoffset={`-${((50/951) + (25/2074)) * 264}`} strokeLinecap="round" />
                   <text x="50" y="48" textAnchor="middle" dominantBaseline="central"
-                    className="fill-black font-black text-2xl" transform="rotate(90, 50, 50)">424</text>
+                    className="fill-black font-black text-2xl" transform="rotate(90, 50, 50)">80</text>
                   <text x="50" y="60" textAnchor="middle" dominantBaseline="central"
                     className="fill-muted text-[7px]" transform="rotate(90, 50, 50)">SOLVED</text>
                 </svg>
@@ -103,9 +103,9 @@ const Activity = () => {
               {/* Legend */}
               <div className="space-y-2.5">
                 {[
-                  { label: 'Easy', count: '226', total: '951', color: 'bg-black' },
-                  { label: 'Medium', count: '166', total: '2074', color: 'bg-amber-500' },
-                  { label: 'Hard', count: '32', total: '948', color: 'bg-red-500' },
+                  { label: 'Easy', count: '50', total: '951', color: 'bg-black' },
+                  { label: 'Medium', count: '25', total: '2074', color: 'bg-amber-500' },
+                  { label: 'Hard', count: '5', total: '948', color: 'bg-red-500' },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-2">
                     <span className={`w-2.5 h-2.5 rounded-full ${item.color}`} />
@@ -118,44 +118,12 @@ const Activity = () => {
             </div>
 
             <p className="text-xs text-muted mt-2 text-center">
-              Solved 424 problems (32 Hard) verifying computational complexity.
+              Solved 80+ problems (5 Hard) — consistently practicing DSA.
             </p>
           </motion.div>
         </div>
 
-        {/* Open Source */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 p-6 rounded-2xl bg-white border border-border shadow-sm"
-        >
-          <div className="flex items-center gap-2.5 mb-5">
-            <FaGithub className="w-5 h-5" />
-            <h3 className="font-bold text-sm">Open Source & Competitions</h3>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted">01 / Ecosystem</span>
-              <h4 className="font-semibold text-sm">Project Jupyter / JupyterLab</h4>
-              <p className="text-sm text-muted">
-                Patched font size handler editor bug preventing client-side freezes. Merged PR #18157.
-              </p>
-              <a href="#" className="inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-black transition-colors">
-                Merged PR #18157 <FaExternalLinkAlt className="w-2 h-2" />
-              </a>
-            </div>
-            <div className="space-y-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted">02 / Hackathons</span>
-              <h4 className="font-semibold text-sm">Competitive Engineering</h4>
-              <p className="text-sm text-muted">
-                Finalist at ADCET 2024 and DYPDPU 1.0 2025. Qualified for Avishkar State Championship.
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

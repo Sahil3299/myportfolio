@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaCheck } from 'react-icons/fa';
 import profileImg from '../assets/me.jpg';
 
-const leetcodeStats = { total: 424, easy: 226, med: 166, hard: 32 };
+const leetcodeStats = { total: 80, easy: 50, med: 25, hard: 5 };
 
 const Hero = () => {
   const [copied, setCopied] = useState(null);
@@ -52,7 +52,7 @@ const Hero = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black text-white text-[10px] font-semibold uppercase tracking-wider"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              ACTIVE SPRINT // AVAILABLE
+              CURRENTLY SHIPPING // AVAILABLE
             </motion.div>
 
             <motion.div
@@ -61,7 +61,7 @@ const Hero = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="space-y-2"
             >
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
                 FROM PROTOTYPE<br />
                 <span className="italic font-black">TO PRODUCTION.</span>
               </h1>
@@ -116,7 +116,7 @@ const Hero = () => {
                   <FaGithub className="w-3 h-3" />
                   <span className="text-[8px] font-semibold uppercase tracking-wider">GitHub</span>
                 </div>
-                <p className="text-lg font-black">680+</p>
+                <p className="text-lg font-black">400+</p>
                 <p className="text-[8px] text-muted mb-1.5">Commits</p>
                 <div className="flex items-end gap-[2px] h-5">
                   {[40, 65, 35, 80, 55, 90, 70].map((h, i) => (

@@ -42,11 +42,7 @@ const Experience = () => {
     },
   ];
 
-  const [expandedIdx, setExpandedIdx] = useState(null);
-
-  const toggleExpand = (idx) => {
-    setExpandedIdx(expandedIdx === idx ? null : idx);
-  };
+  const [hoveredIdx, setHoveredIdx] = useState(null);
 
   return (
     <section id="experience" className="py-24 px-4">
@@ -62,7 +58,7 @@ const Experience = () => {
 
           <div className="space-y-6">
             {experiences.map((exp, idx) => {
-              const isOpen = expandedIdx === idx;
+              const isOpen = hoveredIdx === idx;
               return (
                 <motion.div
                   key={`${exp.title}-${idx}`}
@@ -85,9 +81,11 @@ const Experience = () => {
                   <span className="text-xs font-semibold text-muted">{exp.date}</span>
 
                   {/* Card */}
-                  <div
-                    className="mt-1.5 p-5 rounded-2xl bg-white border border-border shadow-sm cursor-pointer select-none"
-                    onClick={() => toggleExpand(idx)}
+                  <motion.div
+                    whileHover={{ scale: 1.02, transition: { type: 'spring', stiffness: 300, damping: 15 } }}
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    className="mt-1.5 p-5 rounded-2xl bg-white border border-border shadow-sm select-none"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1">
@@ -127,7 +125,7 @@ const Experience = () => {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
