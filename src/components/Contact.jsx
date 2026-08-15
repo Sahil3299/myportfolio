@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
-import resume from '../assets/sahil_Resume (4).pdf';
+import resume from '../assets/Sahil_Resume (4).pdf';
 
 const Contact = () => {
   const channels = [
