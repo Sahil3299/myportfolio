@@ -48,3 +48,11 @@ body {
   text-transform: uppercase;
   color: #6b6b6b;
 }
+
+.mobile-carousel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.mobile-carousel::-webkit-scrollbar {
+  display: none;
+}

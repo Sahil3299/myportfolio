@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   FaReact, FaNodeJs, FaGithub, FaExternalLinkAlt, FaMapMarkerAlt, FaServer,
 } from 'react-icons/fa';
@@ -129,57 +130,145 @@ const ProjectCard = ({ project }) => {
   );
 };
 
+const projects = [
+  {
+    tag: 'PROJECT 01',
+    title: 'NestMate',
+    context: 'Flatmate and rental platforms lack real-time communication and secure data handling, making it hard for users to coordinate.',
+    execution: 'Built a full-stack platform with React frontend, Node.js/Express backend, MongoDB, and WebSocket-based real-time chat under 150ms latency with JWT authorization.',
+    impact: 'Real-time chat with secure JWT-based data protection backed by an active rental community.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Socket.IO', 'Tailwind'],
+    stats: [
+      { metric: '300+', label: 'ACTIVE LISTINGS' },
+      { metric: '<150ms', label: 'CHAT LATENCY' },
+      { metric: 'JWT', label: 'AUTH' },
+    ],
+    github: 'https://github.com/Sahil3299/NestMate',
+    live: null,
+    image: nestmateImg,
+  },
+  {
+    tag: 'PROJECT 02',
+    title: 'BloodConnect',
+    context: 'Emergency blood donors are hard to locate quickly during critical, time-sensitive situations.',
+    execution: 'Engineered geospatial queries with MongoDB 2dsphere indexes to locate and notify nearest donors in under 3 seconds. Built with React, Node.js, and Geolocation API.',
+    impact: 'Geospatial donor notification system adopted by local hospitals for emergency blood requests.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Geolocation API'],
+    stats: [
+      { metric: '<3s', label: 'DONOR LOCATE' },
+      { metric: '3', label: 'HOSPITALS' },
+      { metric: 'Geo', label: 'QUERY' },
+    ],
+    github: 'https://github.com/Sahil3299/Blood_connect',
+    live: 'https://blood-connect-jwdg.vercel.app/',
+    image: bloodconnectImg,
+  },
+  {
+    tag: 'PROJECT 03',
+    title: 'YelpCamp',
+    context: 'Campground enthusiasts need a centralized platform to share and discover camping spots with reliable reviews.',
+    execution: 'Developed a full CRUD application with Passport.js authentication, Cloudinary image storage, and Mapbox integration for interactive campground maps.',
+    impact: 'Full-featured campground review platform with secure auth, rich media, and interactive map visualization.',
+    stack: ['Node.js', 'Express', 'MongoDB', 'Cloudinary', 'Mapbox'],
+    stats: [
+      { metric: 'CRUD', label: 'FULL STACK' },
+      { metric: 'Cloud', label: 'MEDIA' },
+      { metric: 'Mapbox', label: 'MAPS' },
+    ],
+    github: 'https://github.com/Sahil3299/YelpCamp',
+    live: 'https://yelpcamp-9qpe.onrender.com/',
+    image: yelpcampImg,
+  },
+];
+
+const MOBILE_BREAKPOINT = 768;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  return isMobile;
+}
+
+const MobileCarousel = ({ projects }) => {
+  const trackRef = useRef(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const scrollLeft = el.scrollLeft;
+    const cardWidth = el.children[0]?.offsetWidth || 1;
+    const gap = 16;
+    const idx = Math.round(scrollLeft / (cardWidth + gap));
+    setActiveIdx(Math.min(idx, projects.length - 1));
+  }, [projects.length]);
+
+  const scrollTo = useCallback((idx) => {
+    const el = trackRef.current;
+    if (!el || !el.children[idx]) return;
+    el.scrollTo({ left: el.children[idx].offsetLeft, behavior: 'smooth' });
+  }, []);
+
+  return (
+    <div>
+      <div
+        ref={trackRef}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 mobile-carousel"
+        onScroll={handleScroll}
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        {projects.map((project) => (
+          <div
+            key={project.title}
+            className="snap-center shrink-0 w-[85%] first:ml-0 last:mr-0"
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center gap-2 mt-6">
+        {projects.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollTo(idx)}
+            aria-label={`Go to project ${idx + 1}`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              idx === activeIdx
+                ? 'bg-black w-6'
+                : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const DesktopStack = ({ projects }) => (
+  <div className="relative" style={{ height: `${projects.length * 100 + 20}vh` }}>
+    {projects.map((project, idx) => (
+      <div
+        key={project.title}
+        className="sticky top-0 min-h-[80vh] flex items-start pt-8"
+        style={{ zIndex: idx + 1, marginBottom: idx < projects.length - 1 ? '-5vh' : 0 }}
+      >
+        <ProjectCard project={project} />
+      </div>
+    ))}
+  </div>
+);
+
 const Work = () => {
-  const projects = [
-    {
-      tag: 'PROJECT 01',
-      title: 'NestMate',
-      context: 'Flatmate and rental platforms lack real-time communication and secure data handling, making it hard for users to coordinate.',
-      execution: 'Built a full-stack platform with React frontend, Node.js/Express backend, MongoDB, and WebSocket-based real-time chat under 150ms latency with JWT authorization.',
-      impact: 'Real-time chat with secure JWT-based data protection backed by an active rental community.',
-      stack: ['React', 'Node.js', 'MongoDB', 'Socket.IO', 'Tailwind'],
-      stats: [
-        { metric: '300+', label: 'ACTIVE LISTINGS' },
-        { metric: '<150ms', label: 'CHAT LATENCY' },
-        { metric: 'JWT', label: 'AUTH' },
-      ],
-      github: 'https://github.com/Sahil3299/NestMate',
-      live: null,
-      image: nestmateImg,
-    },
-    {
-      tag: 'PROJECT 02',
-      title: 'BloodConnect',
-      context: 'Emergency blood donors are hard to locate quickly during critical, time-sensitive situations.',
-      execution: 'Engineered geospatial queries with MongoDB 2dsphere indexes to locate and notify nearest donors in under 3 seconds. Built with React, Node.js, and Geolocation API.',
-      impact: 'Geospatial donor notification system adopted by local hospitals for emergency blood requests.',
-      stack: ['React', 'Node.js', 'MongoDB', 'Geolocation API'],
-      stats: [
-        { metric: '<3s', label: 'DONOR LOCATE' },
-        { metric: '3', label: 'HOSPITALS' },
-        { metric: 'Geo', label: 'QUERY' },
-      ],
-      github: 'https://github.com/Sahil3299/Blood_connect',
-      live: 'https://blood-connect-jwdg.vercel.app/',
-      image: bloodconnectImg,
-    },
-    {
-      tag: 'PROJECT 03',
-      title: 'YelpCamp',
-      context: 'Campground enthusiasts need a centralized platform to share and discover camping spots with reliable reviews.',
-      execution: 'Developed a full CRUD application with Passport.js authentication, Cloudinary image storage, and Mapbox integration for interactive campground maps.',
-      impact: 'Full-featured campground review platform with secure auth, rich media, and interactive map visualization.',
-      stack: ['Node.js', 'Express', 'MongoDB', 'Cloudinary', 'Mapbox'],
-      stats: [
-        { metric: 'CRUD', label: 'FULL STACK' },
-        { metric: 'Cloud', label: 'MEDIA' },
-        { metric: 'Mapbox', label: 'MAPS' },
-      ],
-      github: 'https://github.com/Sahil3299/YelpCamp',
-      live: 'https://yelpcamp-9qpe.onrender.com/',
-      image: yelpcampImg,
-    },
-  ];
+  const isMobile = useIsMobile();
 
   return (
     <section id="work" className="relative px-4 py-24">
@@ -189,17 +278,11 @@ const Work = () => {
           <h2 className="text-3xl sm:text-4xl font-black mt-1">Featured Projects</h2>
         </div>
 
-        <div className="relative" style={{ height: `${projects.length * 100 + 20}vh` }}>
-          {projects.map((project, idx) => (
-            <div
-              key={project.title}
-              className="sticky top-0 min-h-[80vh] flex items-start pt-8"
-              style={{ zIndex: idx + 1, marginBottom: idx < projects.length - 1 ? '-5vh' : 0 }}
-            >
-              <ProjectCard project={project} />
-            </div>
-          ))}
-        </div>
+        {isMobile ? (
+          <MobileCarousel projects={projects} />
+        ) : (
+          <DesktopStack projects={projects} />
+        )}
       </div>
     </section>
   );
